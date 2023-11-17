@@ -5,6 +5,14 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
+	<style>
+		.center {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 50%;
+		  }
+		</style>
 	<head>
 		<title>User-Item Interactions</title>
 		<meta charset="utf-8" />
@@ -52,10 +60,103 @@
 						<div class="inner">
 							<h1>User-Item Interactions</h1>
                             <h2>SQL: Data Wrangling, AB Testing</h2>
-							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
-							<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel venenatis mauris vehicula hendrerit.</p>
-							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+							<span class="image main"><img src="images\webdev.jpg" alt="" class=center style="width:700px;height:350px;"/></span>
+							<p>The objective of this project is to retrieve necessary data using SQL to see if adjusting item page layout on this particular website increases digital traffic. The treatment and control groups were set up previously before the course and the main focus of this project is to execute AB testing of "item test 2", which is our designated trial. Below is the PDF of the full report done in the HTML feature within Mode Studio as part of the course. </p>
+							<p><a href="https://acrobat.adobe.com/id/urn:aaid:sc:va6c2:f56693a9-c270-474b-9e95-553b27a8920a">Download Full Report Here</a></p>
+							<img src="images\useritem.jpg" class="center" width=400>
+							<p><b>SQL Code for Data Report</b></p>
+							<pre><code>--Data Quality Check
+SELECT 
+  * 
+FROM 
+  dsv1069.final_assignments_qa
+
+--Reformat the Data
+SELECT item_id,
+	   test_a AS test_assignment,
+	   'item_test_1' AS test_number,
+	   CAST('2013-01-05 00:00:00' AS timestamp) AS test_start_date
+FROM dsv1069.final_assignments_qa
+UNION ALL
+SELECT item_id,
+	   test_b AS test_assignment,
+	   'item_test_2' AS test_number,
+	   CAST('2013-01-05 00:00:00' AS timestamp) AS test_start_date
+FROM dsv1069.final_assignments_qa
+UNION ALL
+SELECT item_id,
+	   test_c AS test_assignment,
+	   'item_test_3' AS test_number,
+	   CAST('2013-01-05 00:00:00' AS timestamp) AS test_start_date
+FROM dsv1069.final_assignments_qa
+UNION ALL
+SELECT item_id,
+	   test_d AS test_assignment,
+	   'item_test_4' AS test_number,
+	   CAST('2013-01-05 00:00:00' AS timestamp) AS test_start_date
+FROM dsv1069.final_assignments_qa
+UNION ALL
+SELECT item_id,
+	   test_e AS test_assignment,
+	   'item_test_5' AS test_number,
+	   CAST('2013-01-05 00:00:00' AS timestamp) AS test_start_date
+FROM dsv1069.final_assignments_qa
+UNION ALL
+SELECT item_id,
+	   test_f AS test_assignment,
+	   'item_test_6' AS test_number,
+	   CAST('2013-01-05 00:00:00' AS timestamp) AS test_start_date
+FROM dsv1069.final_assignments_qa
+
+--Compute Order Binary
+SELECT
+  order_binary.test_assignment,
+  COUNT(DISTINCT order_binary.item_id) AS num_orders,
+  SUM(order_binary.orders_30d) AS orders_30d
+FROM
+  (SELECT
+	final_assignments.item_id,
+	final_assignments.test_assignment,
+	MAX(CASE WHEN DATE(orders.created_at) - DATE(final_assignments.test_start_date) >= 1 
+		  AND DATE(orders.created_at) - DATE(final_assignments.test_start_date) <= 30
+		  THEN 1
+		  ELSE 0 END)                                       AS orders_30d
+  FROM dsv1069.final_assignments
+  LEFT OUTER JOIN dsv1069.orders
+  ON orders.item_id = final_assignments.item_id
+  WHERE test_number = 'item_test_2'
+  GROUP BY 
+	final_assignments.item_id,
+	final_assignments.test_assignment
+	) order_binary
+GROUP BY order_binary.test_assignment
+
+--Compute View Item Metrics
+SELECT
+  view_binary.test_assignment,
+  COUNT(DISTINCT view_binary.item_id) AS num_views,
+  SUM(view_binary.views_30d) AS v30,
+  AVG(view_binary.views_30d) AS avg_view_30d
+FROM
+  (SELECT
+	final_assignments.item_id,
+	final_assignments.test_assignment,
+	MAX(CASE WHEN DATE(view_item_events.event_time) - DATE(final_assignments.test_start_date) >= 1 
+		  AND DATE(view_item_events.event_time) - DATE(final_assignments.test_start_date) <= 30
+		  THEN 1
+		  ELSE 0 END)                                       AS views_30d
+  FROM dsv1069.final_assignments
+  LEFT OUTER JOIN dsv1069.view_item_events
+  ON view_item_events.item_id = final_assignments.item_id
+  WHERE test_number = 'item_test_2'
+  GROUP BY 
+	final_assignments.item_id,
+	final_assignments.test_assignment
+  ORDER BY item_id) view_binary
+GROUP BY view_binary.test_assignment
+							</code></pre>
+							<p><a href="https://github.com/tnpham23/mywebbies/blob/main/user-item%20code/page_layout.sql">SQL Code in Github</a></p>
+							<p><i>Disclaimer: This project was completed for the SQL with A/B Testing Coursera Certificate and SQL server cannot be accessed by individuals outside of the program.</i></p>
 						</div>
 					</div>
 
