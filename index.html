@@ -5,6 +5,22 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
+	<style>
+		img.clipped {
+		width: 50%; /*Scales image to 150% width of parent container*/
+		float: right; /*Floats image to right of container - clipping left hand side*/
+		}
+		.container {
+		width: 0%; /*Use this to control width of the parent container, hence the image*/
+		}
+		.center {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 40%;
+		  }
+		</style>
+
 	<head>
 		<title>Phantom by HTML5 UP</title>
 		<meta charset="utf-8" />
@@ -40,7 +56,7 @@
 						<h2>Menu</h2>
 						<ul>
 							<li><a href="index.html">Home</a></li>
-							<li><a href="generic.html">About Me</a></li>
+							<li><a href="generic.html">CV/Resume</a></li>
 							<!--<li><a href="generic.html">Tempus etiam</a></li>
 							<li><a href="generic.html">Consequat dolor</a></li>
 							<li><a href="elements.html">Elements</a></li> -->
@@ -51,13 +67,28 @@
 					<div id="main">
 						<div class="inner">
 							<header>
-							<center><h1><a href="https://www.linkedin.com/in/thuong-pham-567284233/" class = "button fit">THUONG PHAM</a></h1></center>
-							<center><b><p>Welcome to my journey as a Data Analyst featuring Python, R, SQL, and more. Click any tab below to check out my projects!</p></b></center>	
+								<h1>Thuong Pham</h1>
+								<span class="container"><img src="images\pfp.jpg"alt="" class="clipped"/></span>
+								<p>Hello everyone! My name is Thuong Pham and I am a graduate from the University of California, Davis with a B.S. in Computational Cognitive Science and a B.A. in Economics. I'm looking for a full-time opportunity as a Data Analyst or Business Analyst. </p>
+								<p>With a background in the higher education industry, psychological & economic research, and project management, I am enthusiastic to apply my skillset across multiple industries, with a high interest for tech, business/retail, and marketing. My previous employments and professional development include working at the UC Davis Continuing and Professional Education Department, Going Solo, and iXperience. Through these amazing experiences, I've honed my proficiency in tools like Python, R, SQL, and Excel and cultivated a passion for creating digestible visualizations to creatively provide data-driven solutions. Additionally, I thrive in high-pressure, competitive environments both as a learner and a leader as demonstrated by my abilities and success as a former director of a university dance team. Through my diverse, unique experiences, I hope to contribute meaningful and insightful impact at your company demonstrated by my statistical and leadership skills.  </p>
+								<p>Feel free to contact me or connect with me on Linkedin regarding any job/networking opportunities, or to simply have a quick chat! I would love to gain insight about your company culture or experiences in the field! </p>
+								<p class="center"><b>CLICK ON ANY ICON BELOW TO VIEW MY PROJECTS!</b></p>
 							</header>
 							<section class="tiles">
+								<article class="style4">
+									<span class="image">
+										<img src="images\mic.jpg" alt=""/>
+									</span>
+									<a href="concert.html">
+										<h2>Concert Analytics Dashboard</h2>
+										<div class="content">
+											<p>[NEW!!] How do we optimize tour revenue for Swift Concert Management and what recommendations can we make for their tour planning?</p>
+										</div>
+									</a>
+								</article>
 								<article class="style1">
 									<span class="image">
-										<img src="images\smiley.jpg" alt="" width="300" height="auto"/>
+										<img src="images\globhap.jpg" alt="" height="auto"/>
 									</span>
 									<a href="global_happiness.html">
 										<h2>Global Happiness Analysis</h2>
@@ -88,6 +119,7 @@
 										</div>
 									</a>
 								</article>
+
 								<article class="style2">
 									<span class="image">
 										<img src="images\househealth.jpg" alt="" />
@@ -99,17 +131,7 @@
 										</div>
 									</a>
 								</article>
-								<article class="style4">
-									<span class="image">
-										<img src="images\youtubelogo.jpg" alt="" />
-									</span>
-									<a href="youtube.html">
-										<h2>Youtube Analytics Dashboard</h2>
-										<div class="content">
-											<p>What is the global or regional impact of these trending Youtubers?</p>
-										</div>
-									</a>
-								</article>
+								
 								<article class="style6">
 									<span class="image">
 										<img src="images\dance.jpg" alt="" />
@@ -216,8 +238,8 @@
 							<section>
 								<h2>Follow</h2>
 								<ul class="icons">
-									<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="https://www.linkedin.com/in/thuong-pham459786/" class="icon brands style2 fa-linkedin"><span class="label">Linkedin</span></a></li>
+									<li><a href="https://github.com/tnpham23" class="icon brands style2 fa-github"><span class="label">Github</span></a></li>
 								</ul>
 							</section>
 							<ul class="copyright">
