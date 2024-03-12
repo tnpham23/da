@@ -218,7 +218,7 @@
 						<div class="inner">
 							<section>
 								<h2>Get in touch</h2>
-								<form action="send_email.php" method="post">
+								<form method="post" action="send_email.php">
 									<div class="fields">
 										<div class="field half">
 											<input type="text" name="name" id="name" placeholder="Name" required />
@@ -230,7 +230,7 @@
 											<textarea name="message" id="message" placeholder="Message" required></textarea>
 										</div>
 									</div>
-									<input type="submit" value="Send" class="primary" />
+									<button type="submit" name="Send" class="primary">Send</button>
 								</form>
 							</section>
 							<section>
