@@ -28,7 +28,7 @@ if (isset($_POST["Send"])) {
     $mail->Body = $_POST["message"];
 
     // Send the message
-    $mail->send () ;
+    $mail->send();
     echo
     "
     <script>
@@ -37,4 +37,7 @@ if (isset($_POST["Send"])) {
     </script>
     ";
   }
+else {
+  echo "Message cannot be sent";
+}
 ?>
