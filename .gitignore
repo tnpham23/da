@@ -1,4 +1,6 @@
 /assets
+/images
+/phpmailer
 /elements.html
 /generic.html
 /send_email.php
