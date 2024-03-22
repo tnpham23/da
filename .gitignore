@@ -3,6 +3,6 @@
 /phpmailer
 /elements.html
 /generic.html
-/send_email.php
+*.php
 /LICENSE.txt
 /README.txt
