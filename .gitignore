@@ -1,8 +1,8 @@
-/assets
-/images
-/phpmailer
-/elements.html
-/generic.html
-*.php
-/LICENSE.txt
-/README.txt
+assets
+images
+phpmailer
+elements.html
+generic.html
+send_email.php
+LICENSE.txt
+README.txt
